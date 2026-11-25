@@ -3,11 +3,13 @@ package com.example.all_in_onecontroller.features.barodalkaga.data;
 import com.example.all_in_onecontroller.features.barodalkaga.model.Region;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Local in-memory repository providing historical, geographical, and hero imagery
- * metadata for all 18 administrative regions of Somalia.
+ * Local repository providing accurate historical, geographical, administrative,
+ * regional flag mapping, and official sub-district data for all 18 administrative regions of Somalia.
+ * Sources: NBS Somalia (National Bureau of Statistics) & UN-OCHA (HumData).
  */
 public class RegionDatabase {
 
@@ -20,22 +22,26 @@ public class RegionDatabase {
                 "Awdal",
                 "Borama",
                 "1984",
-                "Amoud University, lush agriculture, and the historic ancient port of Zeila (Saylac)",
-                "Awdal is situated in the northwesternmost corner of Somalia. It has a rich history tied to the medieval Adal Sultanate, lush mountainous terrain, and holds the oldest higher education institution in modern Somali history (Amoud University).",
+                "Amoud University, lush agriculture, and the ancient port of Zeila (Saylac)",
+                "Awdal is situated in the northwestern corner of Somalia. It has a rich history tied to the medieval Adal Sultanate, lush mountainous terrain, and holds Amoud University—the oldest modern university in Somalia.",
                 "Northern",
-                "hero_borama"
+                "hero_borama",
+                "flag_somaliland",
+                Arrays.asList("Borama", "Zeila (Saylac)", "Baki", "Lughaya")
         ));
 
-        // 2. Waqooyi Galbeed (Northern)
+        // 2. Waqooyi Galbeed / Maroodi Jeex (Northern)
         regions.add(new Region(
                 "waqooyi_galbeed",
                 "Waqooyi Galbeed",
                 "Hargeysa",
                 "1960",
-                "Laas Geel prehistoric cave paintings, vibrant livestock commerce, and Somali poetry",
-                "Waqooyi Galbeed is a pivotal cultural and trade hub in northern Somalia. Its capital, Hargeysa, is famous for lively markets, cultural arts, and the world-renowned Neolithic rock art site at Laas Geel dating back over 5,000 years.",
+                "Laas Geel prehistoric cave paintings, vibrant livestock markets, and Somali poetry",
+                "Waqooyi Galbeed is a pivotal cultural and trade hub in northern Somalia. Its capital, Hargeysa, is famous for vibrant commerce, arts, and the world-renowned Neolithic rock art site at Laas Geel (c. 3,500 BC).",
                 "Northern",
-                "laas_geel"
+                "laas_geel",
+                "flag_somaliland",
+                Arrays.asList("Hargeysa", "Berbera", "Gabiley", "Salahlay")
         ));
 
         // 3. Togdheer (Northern)
@@ -44,10 +50,12 @@ public class RegionDatabase {
                 "Togdheer",
                 "Burao",
                 "1973",
-                "Burao Grand Livestock Market, renowned classical poets, and the seasonal Togdheer River",
-                "Togdheer is named after the Togdheer River flowing through it. The region is widely celebrated as the cradle of legendary Somali poetry, folklore, and one of the largest livestock trading centers in the Horn of Africa.",
+                "Burao Grand Livestock Market, classical poets, and the seasonal Togdheer River",
+                "Togdheer is named after the Togdheer River flowing through it. The region is celebrated as the cradle of legendary Somali poetry, folklore, and one of the largest livestock trading hubs in the Horn of Africa.",
                 "Northern",
-                "hero_burao"
+                "hero_burao",
+                "flag_somaliland",
+                Arrays.asList("Burao", "Oodweyne", "Buhoodle", "Sheikh")
         ));
 
         // 4. Sanaag (Northern)
@@ -57,9 +65,11 @@ public class RegionDatabase {
                 "Erigavo (Ceerigaabo)",
                 "1984",
                 "Mount Shimbiris (highest peak in Somalia), Cal Madow forests, natural frankincense harvesting",
-                "Sanaag is the largest region in northern Somalia, renowned for its dramatic mountain ranges, Daallo National Forest, natural frankincense harvesting, and pristine Gulf of Aden coastline.",
+                "Sanaag is the largest region in northern Somalia, renowned for its dramatic mountain ranges, Daallo National Forest, natural frankincense and myrrh harvesting, and pristine Gulf of Aden coastline.",
                 "Northern",
-                "cal_madow"
+                "cal_madow",
+                "flag_somaliland",
+                Arrays.asList("Erigavo (Ceerigaabo)", "El Afweyn", "Badhan", "Dhahar", "Las Khorey")
         ));
 
         // 5. Bari (Northern)
@@ -69,9 +79,11 @@ public class RegionDatabase {
                 "Bosaso (Boosaaso)",
                 "1960",
                 "Major commercial deep seaport, date palm plantations, Cape Guardafui, and ancient spice trade",
-                "Bari occupies the tip of the Horn of Africa. Boosaaso is an energetic port connecting Somalia to the Arabian Peninsula. The region features historic lighthouses, date groves, and extensive marine fisheries.",
+                "Bari occupies the tip of the Horn of Africa. Boosaaso is an energetic port connecting Somalia to the Arabian Peninsula. The region features historic lighthouses, date groves, and marine fisheries.",
                 "Northern",
-                "hero_bosaso"
+                "hero_bosaso",
+                "flag_puntland",
+                Arrays.asList("Bosaso (Boosaaso)", "Qandala", "Caluula", "Iskushuban", "Bander Beyla", "Carmo")
         ));
 
         // 6. Sool (Northern)
@@ -81,9 +93,11 @@ public class RegionDatabase {
                 "Las Anod (Laascaanood)",
                 "1984",
                 "Taleh historical Dervish stone forts, camel pastoralism, and patriotic heritage",
-                "Sool is steeped in history as the capital of the anti-colonial Dervish movement led by Sayid Mohamed Abdullah Hassan in Taleh. The region is also famous for nomadic livestock wealth and rich oral poetry.",
+                "Sool is steeped in history as the capital of the anti-colonial Dervish movement led by Sayid Mohamed Abdullah Hassan in Taleh. The region is famous for nomadic livestock wealth and rich oral poetry.",
                 "Northern",
-                "hero_las_anod"
+                "hero_las_anod",
+                "flag_somaliland",
+                Arrays.asList("Las Anod (Laascaanood)", "Taleh", "Khudun", "Ainabo")
         ));
 
         // 7. Nugaal (Central)
@@ -93,9 +107,11 @@ public class RegionDatabase {
                 "Garowe (Garoowe)",
                 "1973",
                 "Nugaal Valley pastoral grazing lands, administrative institutions, and central crossroads",
-                "Nugaal connects the northern and central parts of Somalia through its scenic valley. Garowe is an important political center with a booming educational, governmental, and commercial sector.",
+                "Nugaal connects northern and central Somalia through its scenic valley. Garowe is an important political and educational center with a booming government and commercial sector.",
                 "Central",
-                "hero_garowe"
+                "hero_garowe",
+                "flag_puntland",
+                Arrays.asList("Garowe (Garoowe)", "Eyl", "Burtinle", "Dengorayo")
         ));
 
         // 8. Mudug (Central)
@@ -105,9 +121,11 @@ public class RegionDatabase {
                 "Galkayo (Gaalkacyo)",
                 "1960",
                 "Central trade crossroads, Hobyo ancient sultanate coastal port, and livestock trade",
-                "Mudug sits in central Somalia with an expansive coastline along the Indian Ocean featuring the historic sultanate town of Hobyo. Galkayo serves as a major commercial transit point connecting south and north.",
+                "Mudug sits in central Somalia with an expansive coastline along the Indian Ocean featuring the historic sultanate town of Hobyo. Galkayo serves as a major commercial transit hub.",
                 "Central",
-                "hero_galkayo"
+                "hero_galkayo",
+                "flag_galmudug",
+                Arrays.asList("Galkayo (Gaalkacyo)", "Hobyo", "Jariban", "Harardhere", "Goldogob")
         ));
 
         // 9. Galguduud (Central)
@@ -119,7 +137,9 @@ public class RegionDatabase {
                 "Pastoral heritage, traditional governance, and central commercial trade routes",
                 "Galguduud is located in central Somalia, bordered by Ethiopia and the Indian Ocean. It is known for resilient livestock pastoralism and strategic crossroads towns like Cadaado and Guriceel.",
                 "Central",
-                "hero_dhusamareb"
+                "hero_dhusamareb",
+                "flag_galmudug",
+                Arrays.asList("Dhusamareb", "Abudwak", "Adado", "El Buur", "El Dher")
         ));
 
         // 10. Hiran (Central)
@@ -129,9 +149,11 @@ public class RegionDatabase {
                 "Beledweyne",
                 "1960",
                 "Shabelle River agriculture, sweet melons, and the historic Beledweyne River Bridge",
-                "Hiran is bisected by the Shabelle River, creating fertile agricultural lands along its banks. Beledweyne is an ancient commercial and transportation hub connecting southern Somalia to the central regions.",
+                "Hiran is bisected by the Shabelle River, creating fertile agricultural lands along its banks. Beledweyne is an ancient commercial and transportation hub connecting southern and central Somalia.",
                 "Central",
-                "hero_beledweyne"
+                "hero_beledweyne",
+                "flag_hirshabelle",
+                Arrays.asList("Beledweyne", "Buloburde", "Jalalaqsi", "Mataban", "Mahas")
         ));
 
         // 11. Middle Shabelle (Southern)
@@ -143,7 +165,9 @@ public class RegionDatabase {
                 "Sugarcane plantations, rice and maize farming, and the Shabelle River irrigation delta",
                 "Middle Shabelle (Shabeellaha Dhexe) has historically been an agricultural breadbasket, known for sugar production, tropical fruits, and scenic riverine farming villages along the Shabelle River.",
                 "Southern",
-                "hero_jowhar"
+                "hero_jowhar",
+                "flag_hirshabelle",
+                Arrays.asList("Jowhar", "Bal'ad", "Adan Yabal", "Cadale", "Mahaday")
         ));
 
         // 12. Banaadir (Southern)
@@ -152,10 +176,12 @@ public class RegionDatabase {
                 "Banaadir",
                 "Mogadishu (Muqdisho)",
                 "1960",
-                "National Capital City, Indian Ocean beaches (Lido), historic Hamar Weyne, and trade",
-                "Banaadir is the smallest yet most populous region, encompassing the capital city of Mogadishu. It boasts centuries-old mosques, Italian colonial architecture, lively universities, and port trade.",
+                "National Capital City, Indian Ocean beaches (Liido), historic Hamar Weyne, and trade",
+                "Banaadir is the smallest yet most populous region, encompassing the national capital Mogadishu. It boasts centuries-old mosques, Italian colonial architecture, universities, and major deepwater ports.",
                 "Southern",
-                "liido_beach"
+                "liido_beach",
+                "flag_banaadir",
+                Arrays.asList("Hamar Weyne", "Hodan", "Howlwadaag", "Karan", "Wadajir", "Dharkenley", "Daynile", "Yaqshid", "Boondhere", "Shibis", "Waberi", "Shangani", "Hamar Jajab", "Abdiaziz", "Kahda")
         ));
 
         // 13. Lower Shabelle (Southern)
@@ -165,9 +191,11 @@ public class RegionDatabase {
                 "Merca (Marka)",
                 "1984",
                 "Banana and citrus plantations, Indian Ocean fisheries, and historic coastal architecture",
-                "Lower Shabelle (Shabeellaha Hoose) is famous for fertile farmland producing bananas, mangoes, and papayas, as well as historic trade ports like Merca and Baraawe with distinct stone architecture.",
+                "Lower Shabelle (Shabeellaha Hoose) is famous for fertile farmland producing bananas, mangoes, and papayas, as well as historic trade ports like Merca and Baraawe with distinct white stone architecture.",
                 "Southern",
-                "hero_merca"
+                "hero_merca",
+                "flag_southwest",
+                Arrays.asList("Merca (Marka)", "Baraawe", "Afgooye", "Wanlaweyn", "Qoryoley", "Kurtunwarey", "Sablaale")
         ));
 
         // 14. Bakool (Southern)
@@ -179,7 +207,9 @@ public class RegionDatabase {
                 "Sorghum agriculture, cattle breeding, and resilient regional market towns",
                 "Bakool is situated in southwestern Somalia bordering Ethiopia. It is known for dryland grain farming (sorghum), pastoral communities, and resilient local trade centers.",
                 "Southern",
-                "hero_hudur"
+                "hero_hudur",
+                "flag_southwest",
+                Arrays.asList("Hudur (Xudur)", "El Barde", "Rabdhure", "Tieglo", "Waajid")
         ));
 
         // 15. Bay (Southern)
@@ -191,7 +221,9 @@ public class RegionDatabase {
                 "City of Sorghum ('Baydhabo Janaay'), natural water springs, and rich agricultural harvests",
                 "Bay is widely called the granary of Somalia. Baidoa, its capital, enjoys abundant underground water springs, limestone formations, and produces a major share of the nation's grains.",
                 "Southern",
-                "hero_baidoa"
+                "hero_baidoa",
+                "flag_southwest",
+                Arrays.asList("Baidoa (Baydhabo)", "Burhakaba", "Dinsoor", "Qansax Dheere")
         ));
 
         // 16. Gedo (Southern)
@@ -203,7 +235,9 @@ public class RegionDatabase {
                 "Juba River valleys, tri-border trade (Kenya & Ethiopia), and lush riverine farms",
                 "Gedo is located in southwestern Somalia, traversed by the Juba River and sharing borders with both Ethiopia and Kenya. Important economic towns include Luuq, Baardheere, and Beled Xaawo.",
                 "Southern",
-                "hero_garbahareey"
+                "hero_garbahareey",
+                "flag_jubaland",
+                Arrays.asList("Garbahareey", "Luuq", "Bardhere", "Beled Hawo", "El Wak", "Dollow")
         ));
 
         // 17. Middle Juba (Southern)
@@ -215,7 +249,9 @@ public class RegionDatabase {
                 "Rich agricultural river plains, natural forestry, and traditional artisanal river fishing",
                 "Middle Juba (Jubbada Dhexe) lies along the lower reaches of the Juba River. Its fertile alluvial soil supports extensive farming, tropical wildlife, and natural forests.",
                 "Southern",
-                "hero_buale"
+                "hero_buale",
+                "flag_jubaland",
+                Arrays.asList("Bu'aale", "Jilib", "Sakow")
         ));
 
         // 18. Lower Juba (Southern)
@@ -225,9 +261,11 @@ public class RegionDatabase {
                 "Kismayo (Kismaayo)",
                 "1960",
                 "Kismayo deepwater port, Bajuni Islands, livestock export, and Indian Ocean fisheries",
-                "Lower Juba (Jubbada Hoose) sits in the southern tip of Somalia. Kismayo is an economic powerhouse with an active port, beautiful coastline, nearby national parks, and fertile river mouths.",
+                "Lower Juba (Jubbada Hoose) sits at the southern tip of Somalia. Kismayo is an economic powerhouse with an active port, beautiful coastline, nearby national parks, and fertile river mouths.",
                 "Southern",
-                "hero_kismayo"
+                "hero_kismayo",
+                "flag_jubaland",
+                Arrays.asList("Kismayo (Kismaayo)", "Afmadow", "Badhadhe", "Jamame")
         ));
 
         return regions;
@@ -235,8 +273,15 @@ public class RegionDatabase {
 
     public static Region getRegionByName(String name) {
         if (name == null) return null;
+
+        String normalizedName = name.trim();
+        if (normalizedName.equalsIgnoreCase("Woqooyi Galbeed")) normalizedName = "Waqooyi Galbeed";
+        if (normalizedName.equalsIgnoreCase("Galgaduud")) normalizedName = "Galguduud";
+        if (normalizedName.equalsIgnoreCase("Hiraan")) normalizedName = "Hiran";
+        if (normalizedName.equalsIgnoreCase("Banadir")) normalizedName = "Banaadir";
+
         for (Region r : getAllRegions()) {
-            if (r.getName().equalsIgnoreCase(name.trim())) {
+            if (r.getName().equalsIgnoreCase(normalizedName)) {
                 return r;
             }
         }

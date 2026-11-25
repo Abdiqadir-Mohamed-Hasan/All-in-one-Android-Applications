@@ -63,6 +63,11 @@ public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.RegionView
             holder.ivRegionThumb.setImageResource(R.drawable.bg_region_hero_default);
         }
 
+        int flagRes = region.getFlagResId(context);
+        if (flagRes != 0 && holder.ivRegionFlag != null) {
+            holder.ivRegionFlag.setImageResource(flagRes);
+        }
+
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onRegionClick(region);
@@ -77,6 +82,7 @@ public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.RegionView
 
     static class RegionViewHolder extends RecyclerView.ViewHolder {
         ImageView ivRegionThumb;
+        ImageView ivRegionFlag;
         TextView tvRegionIndex;
         TextView tvRegionName;
         TextView tvRegionCapital;
@@ -86,6 +92,7 @@ public class RegionAdapter extends RecyclerView.Adapter<RegionAdapter.RegionView
         public RegionViewHolder(@NonNull View itemView) {
             super(itemView);
             ivRegionThumb = itemView.findViewById(R.id.ivRegionThumb);
+            ivRegionFlag = itemView.findViewById(R.id.ivRegionFlag);
             tvRegionIndex = itemView.findViewById(R.id.tvRegionIndex);
             tvRegionName = itemView.findViewById(R.id.tvRegionName);
             tvRegionCapital = itemView.findViewById(R.id.tvRegionCapital);

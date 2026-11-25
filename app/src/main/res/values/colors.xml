@@ -48,4 +48,12 @@
     <color name="power_on">#10B981</color>
     <color name="power_off">#EF4444</color>
     <color name="power_off_bg">#FEF2F2</color>
+
+    <!-- Dalxiis Somalia Theme Colors -->
+    <color name="dalxiis_teal">#0E5A6D</color>
+    <color name="dalxiis_sand">#F4EFE6</color>
+    <color name="dalxiis_terracotta">#D96B43</color>
+    <color name="dalxiis_dark_slate">#1E293B</color>
+    <color name="dalxiis_card_bg">#FFFFFF</color>
+    <color name="dalxiis_light_teal">#E0F2F1</color>
 </resources>

@@ -3,9 +3,10 @@ package com.example.all_in_onecontroller.features.barodalkaga;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
+import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,25 +24,28 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * SCREEN 1: Modern Interactive Home Screen for "Baro Dalkaga"
- * Highlights the map of Somalia, quick stats, featured capital cities carousel,
- * and seamless navigation to the Regions List and Detail screens.
- */
 public class BaroDalkagaActivity extends AppCompatActivity {
 
     private ImageButton btnBack;
     private MaterialCardView cardMapContainer;
-    private ImageView ivSomaliaMap;
+    private SomaliaInteractiveMapView ivSomaliaMap;
     private RecyclerView rvFeaturedCapitals;
     private MaterialButton btnLearnMore;
+    private MaterialCardView cardLearnSomali;
+    private MaterialCardView cardHistoryCulture;
+    private MaterialCardView card18Gobol;
+    private MaterialCardView cardDhaqanka;
 
     private FeaturedCapitalAdapter featuredAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(
+            this,
+            SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
+            SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+        );
         setContentView(R.layout.activity_baro_dalkaga);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.baroMain), (v, insets) -> {
@@ -61,6 +65,10 @@ public class BaroDalkagaActivity extends AppCompatActivity {
         ivSomaliaMap = findViewById(R.id.ivSomaliaMap);
         rvFeaturedCapitals = findViewById(R.id.rvFeaturedCapitals);
         btnLearnMore = findViewById(R.id.btnLearnMore);
+        cardLearnSomali = findViewById(R.id.cardLearnSomali);
+        cardHistoryCulture = findViewById(R.id.cardHistoryCulture);
+        card18Gobol = findViewById(R.id.card18Gobol);
+        cardDhaqanka = findViewById(R.id.cardDhaqanka);
     }
 
     private void setupFeaturedCapitals() {
@@ -95,11 +103,39 @@ public class BaroDalkagaActivity extends AppCompatActivity {
             Intent intent = new Intent(BaroDalkagaActivity.this, RegionsListActivity.class);
             startActivity(intent);
         });
-
-        // Tapping the map also directly navigates to the list
-        if (cardMapContainer != null) {
-            cardMapContainer.setOnClickListener(v -> {
+        
+        if (ivSomaliaMap != null) {
+            ivSomaliaMap.setOnRegionClickListener((regionName, regionId) -> {
+                Intent intent = new Intent(BaroDalkagaActivity.this, RegionDetailActivity.class);
+                intent.putExtra(RegionsListActivity.EXTRA_REGION_NAME, regionName);
+                startActivity(intent);
+            });
+        }
+        
+        if (cardLearnSomali != null) {
+            cardLearnSomali.setOnClickListener(v -> {
+                Intent intent = new Intent(BaroDalkagaActivity.this, LearnSomaliActivity.class);
+                startActivity(intent);
+            });
+        }
+        
+        if (cardHistoryCulture != null) {
+            cardHistoryCulture.setOnClickListener(v -> {
+                Intent intent = new Intent(BaroDalkagaActivity.this, HistoryActivity.class);
+                startActivity(intent);
+            });
+        }
+        
+        if (card18Gobol != null) {
+            card18Gobol.setOnClickListener(v -> {
                 Intent intent = new Intent(BaroDalkagaActivity.this, RegionsListActivity.class);
+                startActivity(intent);
+            });
+        }
+        
+        if (cardDhaqanka != null) {
+            cardDhaqanka.setOnClickListener(v -> {
+                Intent intent = new Intent(BaroDalkagaActivity.this, CultureActivity.class);
                 startActivity(intent);
             });
         }

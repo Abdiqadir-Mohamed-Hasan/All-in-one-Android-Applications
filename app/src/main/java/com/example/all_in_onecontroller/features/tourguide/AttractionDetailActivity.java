@@ -1,14 +1,21 @@
 package com.example.all_in_onecontroller.features.tourguide;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,17 +27,13 @@ import com.google.android.material.button.MaterialButton;
 
 import java.util.Locale;
 
-/**
- * Screen 3: Attraction Detail Screen.
- * Displays a large hero image, location, detailed description, and an
- * "Open in Google Maps" button that fires an implicit Intent using coordinates.
- */
 public class AttractionDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_ATTRACTION = "extra_attraction";
+    private static final String PREF_BOOKMARKS = "dalxiis_bookmarks";
 
     private ImageButton btnBack;
-    private ImageButton btnShare;
+    private ImageButton btnBookmark;
     private ImageView ivAttractionHero;
     private TextView tvDetailCategoryBadge;
     private TextView tvDetailAttractionTitle;
@@ -40,12 +43,24 @@ public class AttractionDetailActivity extends AppCompatActivity {
     private TextView tvDetailFullDescription;
     private MaterialButton btnOpenGoogleMaps;
 
+    // Audio Guide Player Views
+    private ImageButton btnPlayAudioGuide;
+    private SeekBar seekBarAudio;
+    private TextView tvAudioCurrentTime;
+
     private Attraction currentAttraction;
+    private boolean isBookmarked = false;
+    private boolean isAudioPlaying = false;
+    private int audioProgress = 0;
+    private Handler audioHandler = new Handler(Looper.getMainLooper());
+    private Runnable audioRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this,
+                SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
+                SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
         setContentView(R.layout.activity_attraction_detail);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.attractionDetailMain), (v, insets) -> {
@@ -54,19 +69,20 @@ public class AttractionDetailActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Retrieve Serializable Attraction object from Intent
         if (getIntent() != null && getIntent().hasExtra(EXTRA_ATTRACTION)) {
             currentAttraction = (Attraction) getIntent().getSerializableExtra(EXTRA_ATTRACTION);
         }
 
         initViews();
         displayAttractionDetails();
+        checkBookmarkState();
         setupClickListeners();
+        setupAudioPlayer();
     }
 
     private void initViews() {
         btnBack = findViewById(R.id.btnBackDetail);
-        btnShare = findViewById(R.id.btnShareAttraction);
+        btnBookmark = findViewById(R.id.btnBookmark);
         ivAttractionHero = findViewById(R.id.ivAttractionHero);
         tvDetailCategoryBadge = findViewById(R.id.tvDetailCategoryBadge);
         tvDetailAttractionTitle = findViewById(R.id.tvDetailAttractionTitle);
@@ -75,6 +91,10 @@ public class AttractionDetailActivity extends AppCompatActivity {
         tvDetailCoordinates = findViewById(R.id.tvDetailCoordinates);
         tvDetailFullDescription = findViewById(R.id.tvDetailFullDescription);
         btnOpenGoogleMaps = findViewById(R.id.btnOpenGoogleMaps);
+
+        btnPlayAudioGuide = findViewById(R.id.btnPlayAudioGuide);
+        seekBarAudio = findViewById(R.id.seekBarAudio);
+        tvAudioCurrentTime = findViewById(R.id.tvAudioCurrentTime);
     }
 
     private void displayAttractionDetails() {
@@ -103,13 +123,85 @@ public class AttractionDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void checkBookmarkState() {
+        if (currentAttraction == null) return;
+        SharedPreferences prefs = getSharedPreferences(PREF_BOOKMARKS, Context.MODE_PRIVATE);
+        isBookmarked = prefs.getBoolean(currentAttraction.getName(), false);
+        updateBookmarkIcon();
+    }
+
+    private void toggleBookmark() {
+        if (currentAttraction == null) return;
+        isBookmarked = !isBookmarked;
+        SharedPreferences prefs = getSharedPreferences(PREF_BOOKMARKS, Context.MODE_PRIVATE);
+        prefs.edit().putBoolean(currentAttraction.getName(), isBookmarked).apply();
+        updateBookmarkIcon();
+
+        String message = isBookmarked ? "Saved to Offline Bookmarks!" : "Removed from Bookmarks";
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateBookmarkIcon() {
+        if (btnBookmark != null) {
+            btnBookmark.setImageResource(isBookmarked ? R.drawable.ic_bookmark : R.drawable.ic_bookmark);
+            btnBookmark.setColorFilter(isBookmarked ? Color.parseColor("#F59E0B") : Color.WHITE);
+        }
+    }
+
     private void setupClickListeners() {
         btnBack.setOnClickListener(v -> finish());
-
-        // Feature: Open in Google Maps via implicit Intent (Intent.ACTION_VIEW)
+        btnBookmark.setOnClickListener(v -> toggleBookmark());
         btnOpenGoogleMaps.setOnClickListener(v -> openInGoogleMaps());
+    }
 
-        btnShare.setOnClickListener(v -> shareAttractionDetails());
+    private void setupAudioPlayer() {
+        audioRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (isAudioPlaying) {
+                    audioProgress += 2;
+                    if (audioProgress > 100) {
+                        audioProgress = 0;
+                        isAudioPlaying = false;
+                        btnPlayAudioGuide.setImageResource(R.drawable.ic_play);
+                    }
+                    if (seekBarAudio != null) {
+                        seekBarAudio.setProgress(audioProgress);
+                    }
+                    int totalSec = 270; // 4 mins 30 secs
+                    int currSec = (int) (totalSec * (audioProgress / 100.0f));
+                    int min = currSec / 60;
+                    int sec = currSec % 60;
+                    if (tvAudioCurrentTime != null) {
+                        tvAudioCurrentTime.setText(String.format(Locale.US, "%02d:%02d", min, sec));
+                    }
+                    if (isAudioPlaying) {
+                        audioHandler.postDelayed(this, 500);
+                    }
+                }
+            }
+        };
+
+        if (btnPlayAudioGuide != null) {
+            btnPlayAudioGuide.setOnClickListener(v -> {
+                isAudioPlaying = !isAudioPlaying;
+                if (isAudioPlaying) {
+                    btnPlayAudioGuide.setImageResource(R.drawable.ic_pause);
+                    audioHandler.post(audioRunnable);
+                } else {
+                    btnPlayAudioGuide.setImageResource(R.drawable.ic_play);
+                    audioHandler.removeCallbacks(audioRunnable);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (audioHandler != null && audioRunnable != null) {
+            audioHandler.removeCallbacks(audioRunnable);
+        }
+        super.onDestroy();
     }
 
     private void openInGoogleMaps() {
@@ -119,7 +211,6 @@ public class AttractionDetailActivity extends AppCompatActivity {
         double lng = currentAttraction.getLongitude();
         String label = Uri.encode(currentAttraction.getName());
 
-        // Standard geo URI for Google Maps
         Uri gmmIntentUri = Uri.parse("geo:" + lat + "," + lng + "?q=" + lat + "," + lng + "(" + label + ")");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
@@ -127,34 +218,9 @@ public class AttractionDetailActivity extends AppCompatActivity {
         try {
             startActivity(mapIntent);
         } catch (Exception e) {
-            // Fallback to web browser Google Maps if Maps app is not installed
             Uri webUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng);
             Intent webIntent = new Intent(Intent.ACTION_VIEW, webUri);
             startActivity(webIntent);
         }
     }
-
-    private void shareAttractionDetails() {
-        if (currentAttraction == null) return;
-
-        String shareText = "Somalia Tour Guide: " + currentAttraction.getName() + "\n\n"
-                + "• Category: " + currentAttraction.getCategory() + "\n"
-                + "• Location: " + currentAttraction.getLocation() + "\n"
-                + "• Coordinates: " + currentAttraction.getLatitude() + ", " + currentAttraction.getLongitude() + "\n\n"
-                + currentAttraction.getDescription() + "\n\n"
-                + "Explore more on Google Maps: https://www.google.com/maps/search/?api=1&query="
-                + currentAttraction.getLatitude() + "," + currentAttraction.getLongitude();
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, currentAttraction.getName() + " - Somalia Tour Guide");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-
-        try {
-            startActivity(Intent.createChooser(shareIntent, "Share " + currentAttraction.getName()));
-        } catch (Exception e) {
-            Toast.makeText(this, "Unable to share at this moment", Toast.LENGTH_SHORT).show();
-        }
-    }
 }
-

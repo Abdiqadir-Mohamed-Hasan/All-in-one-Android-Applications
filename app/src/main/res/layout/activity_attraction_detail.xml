@@ -72,13 +72,13 @@
                         app:strokeWidth="0dp">
 
                         <ImageButton
-                            android:id="@+id/btnShareAttraction"
+                            android:id="@+id/btnBookmark"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:contentDescription="Share"
+                            android:contentDescription="Bookmark"
                             android:padding="10dp"
-                            android:src="@drawable/ic_share"
+                            android:src="@drawable/ic_bookmark"
                             app:tint="@color/white" />
                     </com.google.android.material.card.MaterialCardView>
                 </RelativeLayout>
@@ -282,6 +282,118 @@
                             android:text="Detailed description of the attraction goes here..."
                             android:textColor="@color/text_primary"
                             android:textSize="14.5sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Audio Guide Walking Tour Preview Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:cardBackgroundColor="@color/dalxiis_card_bg"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/card_stroke"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/ic_play"
+                                android:drawablePadding="6dp"
+                                android:drawableTint="@color/dalxiis_teal"
+                                android:gravity="center_vertical"
+                                android:text="Audio Tour Guide Preview"
+                                android:textColor="@color/dalxiis_teal"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvAudioDuration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_tag_pill"
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="3dp"
+                                android:text="04:30 Walking Tour"
+                                android:textColor="#059669"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <!-- Audio Player Progress Bar & Controls -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/btnPlayAudioGuide"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:background="@drawable/bg_status_pill_ready"
+                                android:contentDescription="Play Audio Guide"
+                                android:src="@drawable/ic_play"
+                                app:tint="@color/dalxiis_teal" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <SeekBar
+                                    android:id="@+id/seekBarAudio"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:max="100"
+                                    android:progress="0"
+                                    android:progressTint="@color/dalxiis_teal"
+                                    android:thumbTint="@color/dalxiis_teal" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingHorizontal="10dp">
+
+                                    <TextView
+                                        android:id="@+id/tvAudioCurrentTime"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentStart="true"
+                                        android:text="00:00"
+                                        android:textColor="@color/text_secondary"
+                                        android:textSize="11sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvAudioTotalTime"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:text="04:30"
+                                        android:textColor="@color/text_secondary"
+                                        android:textSize="11sp" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

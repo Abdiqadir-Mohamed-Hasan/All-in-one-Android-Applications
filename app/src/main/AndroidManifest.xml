@@ -91,6 +91,24 @@
             android:parentActivityName=".features.hub.AssignmentHubActivity" />
 
         <activity
+            android:name=".features.barodalkaga.LearnSomaliActivity"
+            android:exported="false"
+            android:label="Learn Somali"
+            android:parentActivityName=".features.barodalkaga.BaroDalkagaActivity" />
+
+        <activity
+            android:name=".features.barodalkaga.HistoryActivity"
+            android:exported="false"
+            android:label="History of Somalia"
+            android:parentActivityName=".features.barodalkaga.BaroDalkagaActivity" />
+
+        <activity
+            android:name=".features.barodalkaga.CultureActivity"
+            android:exported="false"
+            android:label="Culture of Somalia"
+            android:parentActivityName=".features.barodalkaga.BaroDalkagaActivity" />
+
+        <activity
             android:name=".features.barodalkaga.RegionsListActivity"
             android:exported="false"
             android:label="Regions of Somalia"
@@ -113,20 +131,38 @@
         <activity
             android:name=".features.tourguide.TourGuideHomeActivity"
             android:exported="false"
-            android:label="Somalia Tour Guide"
+            android:label="Dalxiis Somalia"
             android:parentActivityName=".features.hub.AssignmentHubActivity" />
 
         <activity
             android:name=".features.tourguide.AttractionsListActivity"
             android:exported="false"
-            android:label="Tourist Attractions"
+            android:label="Destinations Explorer"
             android:parentActivityName=".features.tourguide.TourGuideHomeActivity" />
 
         <activity
             android:name=".features.tourguide.AttractionDetailActivity"
             android:exported="false"
-            android:label="Attraction Details"
+            android:label="Destination Details"
             android:parentActivityName=".features.tourguide.AttractionsListActivity" />
+
+        <activity
+            android:name=".features.tourguide.CultureHubActivity"
+            android:exported="false"
+            android:label="Culture, History &amp; Cuisine"
+            android:parentActivityName=".features.tourguide.TourGuideHomeActivity" />
+
+        <activity
+            android:name=".features.tourguide.PhrasebookActivity"
+            android:exported="false"
+            android:label="Somali Phrasebook"
+            android:parentActivityName=".features.tourguide.TourGuideHomeActivity" />
+
+        <activity
+            android:name=".features.tourguide.TravelEssentialsActivity"
+            android:exported="false"
+            android:label="Travel &amp; Safety Essentials"
+            android:parentActivityName=".features.tourguide.TourGuideHomeActivity" />
 
     </application>
 
