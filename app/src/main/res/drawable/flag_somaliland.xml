@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="24dp"
+    android:viewportWidth="36"
+    android:viewportHeight="24">
+
+  <!-- Top Green Band -->
+  <path
+      android:fillColor="#059669"
+      android:pathData="M0,0h36v8H0z" />
+
+  <!-- Middle White Band -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M0,8h36v8H0z" />
+
+  <!-- Center Black Star -->
+  <path
+      android:fillColor="#000000"
+      android:pathData="M18,9.2l0.9,1.8 2,0.3 -1.4,1.4 0.3,2 -1.8,-0.9 -1.8,0.9 0.3,-2 -1.4,-1.4 2,-0.3z" />
+
+  <!-- Bottom Red Band -->
+  <path
+      android:fillColor="#EF4444"
+      android:pathData="M0,16h36v8H0z" />
+
+</vector>

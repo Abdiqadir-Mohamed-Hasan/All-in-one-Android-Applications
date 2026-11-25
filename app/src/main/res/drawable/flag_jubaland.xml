@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="24dp"
+    android:viewportWidth="36"
+    android:viewportHeight="24">
+
+  <!-- Top Band: Green -->
+  <path
+      android:fillColor="#10B981"
+      android:pathData="M0,0h36v8H0z" />
+
+  <!-- Middle Band: Blue -->
+  <path
+      android:fillColor="#3B82F6"
+      android:pathData="M0,8h36v8H0z" />
+
+  <!-- White Star in Middle Band -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M24,9.2l0.7,1.4 1.5,0.2 -1.1,1.1 0.3,1.5 -1.4,-0.7 -1.4,0.7 0.3,-1.5 -1.1,-1.1 1.5,-0.2z" />
+
+  <!-- Bottom Band: White -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M0,16h36v8H0z" />
+
+  <!-- Left Green Triangle -->
+  <path
+      android:fillColor="#047857"
+      android:pathData="M0,0L12,12L0,24Z" />
+
+</vector>
